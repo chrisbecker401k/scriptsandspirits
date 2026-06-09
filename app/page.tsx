@@ -184,7 +184,7 @@ export default function Home() {
         </div>
         <a
           className="button primary"
-          href="mailto:hello@scriptsandspirits.com?subject=Scripts%20%26%20Spirits%20Invite%20Request"
+          href="mailto:beckercr@gmail.com?subject=Scripts%20%26%20Spirits%20Invite%20Request"
         >
           Request an Invite
         </a>
