@@ -1,3 +1,5 @@
+const calendarLink = "https://calendar.app.google/v5N4uJU2Jpd36c6m6";
+
 const rhythm = [
   {
     label: "Read",
@@ -12,27 +14,27 @@ const rhythm = [
   {
     label: "Reflect",
     title: "Conversation that lingers",
-    copy: "Guided questions make room for conviction, doubt, laughter, and practical wisdom.",
+    copy: "Conversation makes room for conviction, doubt, laughter, and practical wisdom.",
   },
 ];
 
 const details = [
-  "Thursday, June 11, 2026",
-  "8:30 PM",
-  "Switch Columbus",
-  "Topic: The Nature of the Atonement",
+  "Tuesday, July 28, 2026",
+  "8:30-11:00 PM",
+  "Buckeye Bourbon House",
+  "Topic: Trinitarian Theology",
 ];
 
 const evenings = [
   {
-    week: "June 11",
-    title: "The Nature of the Atonement",
-    passage: "Switch Columbus",
+    week: "July 28",
+    title: "Trinitarian Theology",
+    passage: "Buckeye Bourbon House",
   },
   {
-    week: "8:30 PM",
-    title: "What did the cross accomplish?",
-    passage: "This week",
+    week: "8:30-11:00 PM",
+    title: "Father, Son, and Spirit",
+    passage: "Next gathering",
   },
   {
     week: "Cocktail bar",
@@ -41,11 +43,12 @@ const evenings = [
   },
 ];
 
-const discussionQuestions = [
-  'When we say "Jesus died for our sins," what do we actually mean?',
-  "What problem is the cross solving: guilt, shame, death, evil, alienation from God, corruption within us, or something else?",
-  "Why couldn't God simply forgive sin without the cross?",
-  "Which image best captures the atonement for you: sacrifice, victory, ransom, punishment, healing, or love? Why?",
+const pastConversations = [
+  {
+    title: "The Nature of the Atonement",
+    description:
+      "A conversation on what it means that Christ died for our sins and what the cross accomplished.",
+  },
 ];
 
 export default function Home() {
@@ -63,6 +66,7 @@ export default function Home() {
           <nav>
             <a href="#rhythm">Rhythm</a>
             <a href="#study">Study</a>
+            <a href="#past">Past Conversations</a>
             <a href="#rsvp">RSVP</a>
           </nav>
         </header>
@@ -76,8 +80,8 @@ export default function Home() {
             Christian life.
           </p>
           <div className="hero-actions" aria-label="Primary actions">
-            <a className="button primary" href="#rsvp">
-              Request an Invite
+            <a className="button primary" href={calendarLink} target="_blank" rel="noreferrer">
+              View Details &amp; RSVP
             </a>
             <a className="button secondary" href="#rhythm">
               See the Rhythm
@@ -126,12 +130,12 @@ export default function Home() {
           </div>
         </div>
         <div className="study-copy">
-          <p className="kicker">Opening study</p>
-          <h2>Thursday at Switch Columbus.</h2>
+          <p className="kicker">Next study</p>
+          <h2>Tuesday at Buckeye Bourbon House.</h2>
           <p>
-            We&apos;ll discuss the nature of Christ&apos;s atonement: what it means
-            that Jesus died for our sins, what the cross accomplished, and how
-            different Christian traditions have understood its meaning.
+            We&apos;ll discuss Trinitarian theology: the Christian confession of one
+            God in three persons, how Father, Son, and Spirit are revealed in
+            Scripture, and why the doctrine matters for worship and daily life.
           </p>
           <ul>
             {details.map((detail) => (
@@ -141,25 +145,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section questions-section" aria-label="Discussion questions">
-        <div className="section-heading">
-          <p className="kicker">This week&apos;s conversation</p>
-          <h2>Questions for the table.</h2>
-        </div>
-        <div className="question-list">
-          {discussionQuestions.map((question, index) => (
-            <article className="question-row" key={question}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <p>{question}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
       <section className="section evenings-section" aria-label="Event details">
         <div className="section-heading">
           <p className="kicker">Event details</p>
-          <h2>June 11, 2026 at 8:30 PM.</h2>
+          <h2>Tuesday, July 28 at 8:30 PM.</h2>
         </div>
         <div className="evening-list">
           {evenings.map((evening) => (
@@ -172,21 +161,58 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="section past-section" id="past" aria-label="Past conversations">
+        <div className="section-heading">
+          <p className="kicker">Past conversations</p>
+          <h2>Conversations we&apos;ve already carried around the table.</h2>
+        </div>
+        <div className="past-list">
+          {pastConversations.map((conversation) => (
+            <article className="rhythm-card" key={conversation.title}>
+              <p>Past conversation</p>
+              <h3>{conversation.title}</h3>
+              <span aria-hidden="true" />
+              <p>{conversation.description}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section photo-section" aria-label="Scripts and Spirits gathering photo">
+        <div className="section-heading">
+          <p className="kicker">Around the table</p>
+          <h2>Good drinks, better conversation.</h2>
+        </div>
+        <figure
+          className="gathering-photo"
+          style={{
+            margin: 0,
+            overflow: "hidden",
+            border: "1px solid var(--line)",
+            borderRadius: 8,
+            background: "#0c1414",
+            boxShadow: "0 24px 80px rgba(0, 0, 0, 0.28)",
+          }}
+        >
+          <img
+            src="/scripts-spirits-group.svg"
+            alt="A Scripts and Spirits gathering around an outdoor table with books and drinks."
+            style={{ display: "block", width: "100%", height: "auto" }}
+          />
+        </figure>
+      </section>
+
       <section className="rsvp-section" id="rsvp">
         <div className="rsvp-copy">
           <p className="kicker">Join the table</p>
           <h2>Come ready to think, listen, and speak honestly.</h2>
           <p>
-            Request an invite for this week&apos;s gathering at Switch Columbus.
-            Bring a Bible, order what you like, and expect a serious
-            conversation without performance.
+            RSVP for the next gathering at Buckeye Bourbon House. Bring a Bible,
+            order what you like, and expect a serious conversation without performance.
           </p>
         </div>
-        <a
-          className="button primary"
-          href="mailto:beckercr@gmail.com?subject=Scripts%20%26%20Spirits%20Invite%20Request"
-        >
-          Request an Invite
+        <a className="button primary" href={calendarLink} target="_blank" rel="noreferrer">
+          View Details &amp; RSVP
         </a>
       </section>
     </main>
