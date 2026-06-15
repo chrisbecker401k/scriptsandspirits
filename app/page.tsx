@@ -25,24 +25,6 @@ const details = [
   "Topic: Trinitarian Theology",
 ];
 
-const evenings = [
-  {
-    week: "July 28",
-    title: "Trinitarian Theology",
-    passage: "Buckeye Bourbon House",
-  },
-  {
-    week: "8:30-11:00 PM",
-    title: "Father, Son, and Spirit",
-    passage: "Next gathering",
-  },
-  {
-    week: "Cocktail bar",
-    title: "Honest conversation about Christian life",
-    passage: "Men's study",
-  },
-];
-
 const pastConversations = [
   {
     title: "The Nature of the Atonement",
@@ -145,22 +127,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section evenings-section" aria-label="Event details">
-        <div className="section-heading">
-          <p className="kicker">Event details</p>
-          <h2>Tuesday, July 28 at 8:30 PM.</h2>
-        </div>
-        <div className="evening-list">
-          {evenings.map((evening) => (
-            <article className="evening-row" key={evening.week}>
-              <p>{evening.week}</p>
-              <h3>{evening.title}</h3>
-              <span>{evening.passage}</span>
-            </article>
-          ))}
-        </div>
-      </section>
-
       <section className="section past-section" id="past" aria-label="Past conversations">
         <div className="section-heading">
           <p className="kicker">Past conversations</p>
@@ -176,30 +142,6 @@ export default function Home() {
             </article>
           ))}
         </div>
-      </section>
-
-      <section className="section photo-section" aria-label="Scripts and Spirits gathering photo">
-        <div className="section-heading">
-          <p className="kicker">Around the table</p>
-          <h2>Good drinks, better conversation.</h2>
-        </div>
-        <figure
-          className="gathering-photo"
-          style={{
-            margin: 0,
-            overflow: "hidden",
-            border: "1px solid var(--line)",
-            borderRadius: 8,
-            background: "#0c1414",
-            boxShadow: "0 24px 80px rgba(0, 0, 0, 0.28)",
-          }}
-        >
-          <img
-            src="/scripts-spirits-group.svg"
-            alt="A Scripts and Spirits gathering around an outdoor table with books and drinks."
-            style={{ display: "block", width: "100%", height: "auto" }}
-          />
-        </figure>
       </section>
 
       <section className="rsvp-section" id="rsvp">
