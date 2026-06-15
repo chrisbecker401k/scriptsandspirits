@@ -113,9 +113,9 @@ export default function Home() {
         </div>
         <div className="study-copy">
           <p className="kicker">Next study</p>
-          <h2>Tuesday at Buckeye Bourbon House.</h2>
+          <h2>Trinitarian Theology.</h2>
           <p>
-            We&apos;ll discuss Trinitarian theology: the Christian confession of one
+            Join us at Buckeye Bourbon House where we&apos;ll discuss Trinitarian theology: the Christian confession of one
             God in three persons, how Father, Son, and Spirit are revealed in
             Scripture, and why the doctrine matters for worship and daily life.
           </p>
