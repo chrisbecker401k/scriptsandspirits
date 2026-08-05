@@ -1,4 +1,6 @@
-const calendarLink = "https://calendar.app.google/v5N4uJU2Jpd36c6m6";
+import Image from "next/image";
+
+const calendarLink = "https://calendar.app.google/AYStPMaNjjiUHd5P8";
 
 const rhythm = [
   {
@@ -19,17 +21,33 @@ const rhythm = [
 ];
 
 const details = [
-  "Tuesday, July 28, 2026",
-  "8:30-11:00 PM",
-  "Buckeye Bourbon House",
-  "Topic: Trinitarian Theology",
+  "Tuesday, September 22, 2026",
+  "8:30 PM",
+  "Vasso, Dublin",
+  "Topic: Covenantal Theology",
 ];
 
 const pastConversations = [
   {
+    title: "Trinitarian Theology",
+    description:
+      "A conversation on the Christian confession of one God in three persons and why the doctrine matters for worship and daily life.",
+  },
+  {
     title: "The Nature of the Atonement",
     description:
       "A conversation on what it means that Christ died for our sins and what the cross accomplished.",
+  },
+];
+
+const gatheringImages = [
+  {
+    src: "/scripts-spirits-group.png",
+    alt: "A Scripts and Spirits gathering around an outdoor table with books and drinks.",
+  },
+  {
+    src: "/IMG_9375.png",
+    alt: "A Scripts and Spirits gathering photo.",
   },
 ];
 
@@ -113,11 +131,12 @@ export default function Home() {
         </div>
         <div className="study-copy">
           <p className="kicker">Next study</p>
-          <h2>Trinitarian Theology.</h2>
+          <h2>Covenantal Theology.</h2>
           <p>
-            Join us at Buckeye Bourbon House where we&apos;ll discuss Trinitarian theology: the Christian confession of one
-            God in three persons, how Father, Son, and Spirit are revealed in
-            Scripture, and why the doctrine matters for worship and daily life.
+            Join us at Vasso in Dublin where we&apos;ll discuss Covenantal Theology:
+            how Scripture tells one unified story through God&apos;s promises, how
+            those covenants shape our reading of the Bible, and why they matter
+            for faith and daily life.
           </p>
           <ul>
             {details.map((detail) => (
@@ -160,11 +179,18 @@ export default function Home() {
             boxShadow: "0 24px 80px rgba(0, 0, 0, 0.28)",
           }}
         >
-          <img
-            src="/scripts-spirits-group.png"
-            alt="A Scripts and Spirits gathering around an outdoor table with books and drinks."
-            style={{ display: "block", width: "100%", height: "auto" }}
-          />
+          <div className="photo-rotator">
+            {gatheringImages.map((image, index) => (
+              <Image
+                src={image.src}
+                alt={image.alt}
+                fill
+                sizes="(max-width: 1160px) calc(100vw - 40px), 1120px"
+                className={index === 0 ? "active" : undefined}
+                key={image.src}
+              />
+            ))}
+          </div>
         </figure>
       </section>
 
@@ -173,7 +199,7 @@ export default function Home() {
           <p className="kicker">Join the table</p>
           <h2>Come ready to think, listen, and speak honestly.</h2>
           <p>
-            RSVP for the next gathering at Buckeye Bourbon House. Bring a Bible,
+            RSVP for the next gathering at Vasso in Dublin. Bring a Bible,
             order what you like, and expect a serious conversation without performance.
           </p>
         </div>
