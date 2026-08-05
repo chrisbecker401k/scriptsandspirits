@@ -325,6 +325,11 @@ h1 {
   line-height: 1.68;
 }
 
+.past-list {
+  display: grid;
+  gap: clamp(18px, 3vw, 28px);
+}
+
 .study-panel {
   display: grid;
   grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.1fr);
