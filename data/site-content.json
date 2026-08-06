@@ -1,0 +1,29 @@
+{
+  "carousel": [
+    {
+      "id": "group-table",
+      "src": "/scripts-spirits-group.png",
+      "alt": "A Scripts and Spirits gathering around an outdoor table with books and drinks.",
+      "caption": "Around the table"
+    },
+    {
+      "id": "gathering-photo",
+      "src": "/IMG_9375.png",
+      "alt": "A Scripts and Spirits gathering photo.",
+      "caption": "Good drinks, better conversation"
+    }
+  ],
+  "events": [
+    {
+      "id": "covenantal-theology-2026-09-22",
+      "title": "Covenantal Theology",
+      "date": "2026-09-22",
+      "time": "8:30 PM",
+      "location": "Vasso, Dublin",
+      "topic": "Covenantal Theology",
+      "description": "How Scripture tells one unified story through God's promises, how those covenants shape our reading of the Bible, and why they matter for faith and daily life.",
+      "rsvpUrl": "https://calendar.app.google/AYStPMaNjjiUHd5P8",
+      "reminderRecipients": ""
+    }
+  ]
+}

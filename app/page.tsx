@@ -1,6 +1,9 @@
 import Image from "next/image";
+import { firstUpcomingEvent, formatEventDate, getSiteContent } from "@/lib/siteData";
 
 const calendarLink = "https://calendar.app.google/AYStPMaNjjiUHd5P8";
+
+export const dynamic = "force-dynamic";
 
 const rhythm = [
   {
@@ -20,13 +23,6 @@ const rhythm = [
   },
 ];
 
-const details = [
-  "Tuesday, September 22, 2026",
-  "8:30 PM",
-  "Vasso, Dublin",
-  "Topic: Covenantal Theology",
-];
-
 const pastConversations = [
   {
     title: "Trinitarian Theology",
@@ -40,18 +36,20 @@ const pastConversations = [
   },
 ];
 
-const gatheringImages = [
-  {
-    src: "/scripts-spirits-group.png",
-    alt: "A Scripts and Spirits gathering around an outdoor table with books and drinks.",
-  },
-  {
-    src: "/IMG_9375.png",
-    alt: "A Scripts and Spirits gathering photo.",
-  },
-];
+export default async function Home() {
+  const content = await getSiteContent();
+  const nextEvent = firstUpcomingEvent(content.events);
+  const gatheringImages = content.carousel.length > 0 ? content.carousel : [];
+  const details = nextEvent
+    ? [
+        formatEventDate(nextEvent.date),
+        nextEvent.time,
+        nextEvent.location,
+        `Topic: ${nextEvent.topic}`,
+      ].filter(Boolean)
+    : [];
+  const rsvpUrl = nextEvent?.rsvpUrl || calendarLink;
 
-export default function Home() {
   return (
     <main className="site-shell">
       <section className="hero" id="top" aria-label="Scripts and Spirits">
@@ -80,7 +78,7 @@ export default function Home() {
             Christian life.
           </p>
           <div className="hero-actions" aria-label="Primary actions">
-            <a className="button primary" href={calendarLink} target="_blank" rel="noreferrer">
+            <a className="button primary" href={rsvpUrl} target="_blank" rel="noreferrer">
               View Details &amp; RSVP
             </a>
             <a className="button secondary" href="#rhythm">
@@ -131,12 +129,11 @@ export default function Home() {
         </div>
         <div className="study-copy">
           <p className="kicker">Next study</p>
-          <h2>Covenantal Theology.</h2>
+          <h2>{nextEvent?.title ?? "Next gathering"}.</h2>
           <p>
-            Join us at Vasso in Dublin where we&apos;ll discuss Covenantal Theology:
-            how Scripture tells one unified story through God&apos;s promises, how
-            those covenants shape our reading of the Bible, and why they matter
-            for faith and daily life.
+            {nextEvent
+              ? `Join us at ${nextEvent.location} where we'll discuss ${nextEvent.topic}: ${nextEvent.description}`
+              : "The next Scripts & Spirits gathering will be announced soon."}
           </p>
           <ul>
             {details.map((detail) => (
@@ -203,7 +200,7 @@ export default function Home() {
             order what you like, and expect a serious conversation without performance.
           </p>
         </div>
-        <a className="button primary" href={calendarLink} target="_blank" rel="noreferrer">
+        <a className="button primary" href={rsvpUrl} target="_blank" rel="noreferrer">
           View Details &amp; RSVP
         </a>
       </section>
