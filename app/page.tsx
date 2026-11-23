@@ -1,8 +1,6 @@
 import Image from "next/image";
 import { firstUpcomingEvent, formatEventDate, getSiteContent } from "@/lib/siteData";
 
-const calendarLink = "https://calendar.app.google/AYStPMaNjjiUHd5P8";
-
 export const dynamic = "force-dynamic";
 
 const rhythm = [
@@ -26,11 +24,13 @@ const rhythm = [
 const pastConversations = [
   {
     title: "Trinitarian Theology",
+    image: "/trinitarian-theology-gathering.webp",
     description:
       "A conversation on the Christian confession of one God in three persons and why the doctrine matters for worship and daily life.",
   },
   {
     title: "The Nature of the Atonement",
+    image: null,
     description:
       "A conversation on what it means that Christ died for our sins and what the cross accomplished.",
   },
@@ -48,7 +48,7 @@ export default async function Home() {
         `Topic: ${nextEvent.topic}`,
       ].filter(Boolean)
     : [];
-  const rsvpUrl = nextEvent?.rsvpUrl || calendarLink;
+  const rsvpUrl = nextEvent?.rsvpUrl;
 
   return (
     <main className="site-shell">
@@ -78,9 +78,11 @@ export default async function Home() {
             Christian life.
           </p>
           <div className="hero-actions" aria-label="Primary actions">
-            <a className="button primary" href={rsvpUrl} target="_blank" rel="noreferrer">
-              View Details &amp; RSVP
-            </a>
+            {rsvpUrl ? (
+              <a className="button primary" href={rsvpUrl} target="_blank" rel="noreferrer">
+                View Details &amp; RSVP
+              </a>
+            ) : null}
             <a className="button secondary" href="#rhythm">
               See the Rhythm
             </a>
@@ -150,11 +152,23 @@ export default async function Home() {
         </div>
         <div className="past-list">
           {pastConversations.map((conversation) => (
-            <article className="rhythm-card" key={conversation.title}>
-              <p>Past conversation</p>
-              <h3>{conversation.title}</h3>
-              <span aria-hidden="true" />
-              <p>{conversation.description}</p>
+            <article className={conversation.image ? "rhythm-card past-photo-card" : "rhythm-card past-conversation-card"} key={conversation.title}>
+              <div className="past-card-copy">
+                <p>Past conversation</p>
+                <h3>{conversation.title}</h3>
+                <span aria-hidden="true" />
+                <p>{conversation.description}</p>
+              </div>
+              {conversation.image ? (
+                <Image
+                  src={conversation.image}
+                  alt="Members of Scripts & Spirits gathered together after a Bible study."
+                  width={560}
+                  height={420}
+                  sizes="(max-width: 860px) 100vw, 440px"
+                  className="past-card-photo"
+                />
+              ) : null}
             </article>
           ))}
         </div>
@@ -196,13 +210,16 @@ export default async function Home() {
           <p className="kicker">Join the table</p>
           <h2>Come ready to think, listen, and speak honestly.</h2>
           <p>
-            RSVP for the next gathering at Vasso in Dublin. Bring a Bible,
-            order what you like, and expect a serious conversation without performance.
+            {nextEvent
+              ? `RSVP for our ${nextEvent.title} gathering at ${nextEvent.location}. Bring a Bible, order what you like, and expect a serious conversation without performance.`
+              : "The next date is being planned. Check back for details about our next gathering."}
           </p>
         </div>
-        <a className="button primary" href={rsvpUrl} target="_blank" rel="noreferrer">
-          View Details &amp; RSVP
-        </a>
+        {rsvpUrl ? (
+          <a className="button primary" href={rsvpUrl} target="_blank" rel="noreferrer">
+            View Details &amp; RSVP
+          </a>
+        ) : null}
       </section>
     </main>
   );
