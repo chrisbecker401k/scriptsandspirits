@@ -24,13 +24,11 @@ const rhythm = [
 const pastConversations = [
   {
     title: "Trinitarian Theology",
-    image: "/trinitarian-theology-gathering.webp",
     description:
       "A conversation on the Christian confession of one God in three persons and why the doctrine matters for worship and daily life.",
   },
   {
     title: "The Nature of the Atonement",
-    image: null,
     description:
       "A conversation on what it means that Christ died for our sins and what the cross accomplished.",
   },
@@ -39,6 +37,13 @@ const pastConversations = [
 export default async function Home() {
   const content = await getSiteContent();
   const nextEvent = firstUpcomingEvent(content.events);
+  const today = new Date().toISOString().slice(0, 10);
+  const pastEvents = content.events
+    .filter((event) => event.date && event.date < today)
+    .map((event) => ({ title: event.title, description: event.description }));
+  const conversations = [...pastEvents, ...pastConversations].filter(
+    (conversation, index, all) => all.findIndex((entry) => entry.title === conversation.title) === index,
+  );
   const gatheringImages = content.carousel.length > 0 ? content.carousel : [];
   const details = nextEvent
     ? [
@@ -151,24 +156,12 @@ export default async function Home() {
           <h2>Conversations we&apos;ve already carried around the table.</h2>
         </div>
         <div className="past-list">
-          {pastConversations.map((conversation) => (
-            <article className={conversation.image ? "rhythm-card past-photo-card" : "rhythm-card past-conversation-card"} key={conversation.title}>
-              <div className="past-card-copy">
-                <p>Past conversation</p>
-                <h3>{conversation.title}</h3>
-                <span aria-hidden="true" />
-                <p>{conversation.description}</p>
-              </div>
-              {conversation.image ? (
-                <Image
-                  src={conversation.image}
-                  alt="Members of Scripts & Spirits gathered together after a Bible study."
-                  width={560}
-                  height={420}
-                  sizes="(max-width: 860px) 100vw, 440px"
-                  className="past-card-photo"
-                />
-              ) : null}
+          {conversations.map((conversation) => (
+            <article className="rhythm-card" key={conversation.title}>
+              <p>Past conversation</p>
+              <h3>{conversation.title}</h3>
+              <span aria-hidden="true" />
+              <p>{conversation.description}</p>
             </article>
           ))}
         </div>
@@ -198,6 +191,11 @@ export default async function Home() {
                 fill
                 sizes="(max-width: 1160px) calc(100vw - 40px), 1120px"
                 className={index === 0 ? "active" : undefined}
+                style={
+                  gatheringImages.length === 3
+                    ? { animationName: "photo-fade-three", animationDuration: "18s", animationDelay: `-${((3 - index) % 3) * 6}s` }
+                    : undefined
+                }
                 key={image.src}
               />
             ))}
