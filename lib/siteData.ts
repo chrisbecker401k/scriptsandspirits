@@ -105,6 +105,6 @@ export function firstUpcomingEvent(events: EventItem[]) {
       .find((event) => {
         const eventDate = new Date(`${event.date}T12:00:00`);
         return !Number.isNaN(eventDate.getTime()) && eventDate >= today;
-      }) ?? events[0]
+      }) ?? null
   );
 }
